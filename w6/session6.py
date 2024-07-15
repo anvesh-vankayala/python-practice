@@ -1,3 +1,5 @@
+## Q1:
+
 
 def add(a:int,b:int):
     """This methods adds two numbers
@@ -9,7 +11,8 @@ def add(a:int,b:int):
         __doc__ is more than 50 chars.
        """
     return a+b
-## Q1:
+
+## Doc string len tester
 def document_checker():
     """Checks if given function __doc__ is more than
      or equal to 50 chars.
@@ -20,14 +23,15 @@ def document_checker():
     doc_min_len = 50
 
     def checker(func):
-        print(len(func.__doc__))
-        if len(func.__doc__) >= doc_min_len:
-            return True
+        if func.__doc__ is not None:
+            print(len(func.__doc__))
+            if len(func.__doc__) >= doc_min_len:
+                return True
         return False
     
     return checker
 
 
 
-# dc = document_checker()
-# print(dc(add))
+dc = document_checker()
+print(dc(add))
