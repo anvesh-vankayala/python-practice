@@ -31,7 +31,33 @@ def document_checker():
     
     return checker
 
+# dc = document_checker()
+# print(dc(add))
 
 
-dc = document_checker()
-print(dc(add))
+## Q2:
+def fibonacci_numbers():
+    """
+    This closure generates fibonocci series
+    for each call of next it gets next number.
+
+    Returns:
+        Returns next fibonacci number.
+
+    """
+    prev = 0
+    current = 1
+
+    def next():
+        nonlocal prev, current
+        temp = prev
+        prev = current
+        current =  temp + current
+        return current
+    
+    return next
+
+fib_num = fibonacci_numbers()
+[print(fib_num()) for i in range(0,10)]
+
+

@@ -29,7 +29,7 @@ def test_document_checker_response():
 
 def test_document_checker_closure_have_freevar():
     fu = session6.document_checker()
-    assert len(fu.__code__.co_freevars) > 0 , "Given function dont have closure"
+    assert len(fu.__code__.co_freevars) > 0 , "Given function dont have freevars"
     assert [cell.cell_contents for cell in fu.__closure__][0] == 50 , "Given free variable value must be 50"
 
 def test_document_checker_is_closure():
@@ -40,3 +40,14 @@ def test_document_checker_has_document():
     fu = session6.document_checker()
     assert fu(session6.document_checker) , "Document_checker dont have docs"
 
+## Fibonacci tester
+
+def test_fibonacci_closure_have_freevar():
+    fu = session6.fibonacci_numbers()
+    assert len(fu.__code__.co_freevars) > 0 , "Given function dont have freevars"
+
+def test_fibonacci_closure_is_right():
+    fu = session6.fibonacci_numbers()
+    assert [fu() for i in range(0,10)] == [1,2,3,5,8,13,21,34,55,89] , "Some thing went wrong"
+
+test_fibonacci_closure_is_right()
