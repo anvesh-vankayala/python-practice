@@ -3,6 +3,8 @@ import os
 import session6
 from typing import Callable
 from session6 import function_tracker,func_count_tracker_modified
+import inspect
+import re
 
 ## For testing purpose
 def add(a:int,b:int):
@@ -32,6 +34,24 @@ def test_readme_file_for_formatting():
     content = f.read()
     f.close()
     assert content.count("#") >= 4
+
+
+def test_function_name_had_cap_letter():
+    functions = inspect.getmembers(session6, inspect.isfunction)
+    for function in functions:
+        assert len(re.findall('([A-Z])', function[0])) == 0, "You have used Capital letter(s) in your function names"
+
+def test_indentations():
+    ''' Returns pass if used four spaces for each level of syntactically \
+    significant indenting.'''
+    lines = inspect.getsource(session6)
+    spaces = re.findall('\n +.', lines)
+    for space in spaces:
+        assert len(space) % 4 == 2, "Your script contains misplaced indentations"
+        assert len(re.sub(r'[^ ]', '', space)) % 4 == 0, "Your code indentation does not follow PEP8 guidelines" 
+
+
+#############################################
 
 ## Q1 : Doc string len tester
 def test_document_checker_response():

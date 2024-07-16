@@ -32,7 +32,7 @@ def document_checker():
     return checker
 
 # dc = document_checker()
-# print(dc(add))
+## print(dc(add))
 
 
 ## Q2:
@@ -58,7 +58,7 @@ def fibonacci_numbers():
     return next
 
 # fib_num = fibonacci_numbers()
-# [print(fib_num()) for i in range(0,10)]
+## [print(fib_num()) for i in range(0,10)]
 
 ## Q3: function tracker
 
@@ -80,7 +80,6 @@ def function_tracker(fn):
         else:
             func_count_tracker[fn.__name__] = 1
         return fn(*args,**kwargs)
-    # print(func_count_tracker)
     return track
 
 # @function_tracker
@@ -130,7 +129,6 @@ def func_count_tracker_modified(dist={}):
                 else:
                     func_count_tracker_modified_dist[fn.__name__] = 1
             return fn(*args,**kwargs)
-        # print(func_count_tracker_modified_dist)
         return track
     return function_tracker_inner
 
