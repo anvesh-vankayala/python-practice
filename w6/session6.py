@@ -57,7 +57,47 @@ def fibonacci_numbers():
     
     return next
 
-fib_num = fibonacci_numbers()
-[print(fib_num()) for i in range(0,10)]
+# fib_num = fibonacci_numbers()
+# [print(fib_num()) for i in range(0,10)]
 
+## Q3: function tracker
+
+func_count_tracker = {}
+
+def function_tracker(fn):
+    """
+    It is a decorator that counts how many times the function
+    is called. At global level this decorator keeps track of this.
+
+    Returns:
+        Returns the closure, that tracks the function call count
+    """
+    def track(*args,**kwargs):
+        global func_count_tracker
+        print(f'Closure triggred by {fn.__name__}')
+        if fn.__name__ in func_count_tracker:
+            func_count_tracker[fn.__name__] += 1
+        else:
+            func_count_tracker[fn.__name__] = 1
+        return fn(*args,**kwargs)
+    print(func_count_tracker)
+    return track
+
+# @function_tracker
+# def add(a,b):
+#     return a+b
+
+# @function_tracker
+# def mul(a,b):
+#     return a*b
+# @function_tracker
+# def div(a,b):
+#     return a/b
+
+# print(add(3,4))
+# print(mul(3,4))
+# print(div(3,4))
+# print(mul(3,4))
+# print(div(3,4))
+# print(func_count_tracker)
 
