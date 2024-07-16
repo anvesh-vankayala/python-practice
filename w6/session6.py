@@ -80,7 +80,7 @@ def function_tracker(fn):
         else:
             func_count_tracker[fn.__name__] = 1
         return fn(*args,**kwargs)
-    print(func_count_tracker)
+    # print(func_count_tracker)
     return track
 
 # @function_tracker
@@ -101,3 +101,59 @@ def function_tracker(fn):
 # print(div(3,4))
 # print(func_count_tracker)
 
+## Q4: function tracker modified
+
+func_count_tracker_modified_dist = {}
+
+def func_count_tracker_modified(dist={}):
+    """
+        It is a decorator that counts how many times the function 
+        is called with custom dist. At global level this decorator keeps track of this.
+
+        Returns:
+            Returns the decorator,which has closure in it, that tracks the function call count
+    """
+    def function_tracker_inner(fn):
+        """
+        It is a decorator that counts how many times the function
+        is called. At global level this decorator keeps track of this.
+
+        Returns:
+            Returns the closure, that tracks the function call count
+        """
+        def track(*args,**kwargs):
+            global func_count_tracker_modified_dist
+            if dist[fn.__name__]: ## If the func exists in dist it will be tracked else not
+                print(f'Closure triggred by {fn.__name__}')
+                if fn.__name__ in func_count_tracker_modified_dist:
+                    func_count_tracker_modified_dist[fn.__name__] += 1
+                else:
+                    func_count_tracker_modified_dist[fn.__name__] = 1
+            return fn(*args,**kwargs)
+        # print(func_count_tracker_modified_dist)
+        return track
+    return function_tracker_inner
+
+
+# control_dist = {'add':True,
+#                 'sub':True,
+#                 'mul':False}
+
+# @func_count_tracker_modified(control_dist)
+# def add(a,b):
+#     return a+b
+
+# @func_count_tracker_modified(control_dist)
+# def mul(a,b):
+#     return a*b
+
+# @func_count_tracker_modified(control_dist)
+# def div(a,b):
+#     return a/b
+
+# print(add(3,4))
+# print(mul(3,4))
+# print(div(3,4))
+# print(mul(3,4))
+# print(div(3,4))
+# print(func_count_tracker_modified_dist)

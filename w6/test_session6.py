@@ -1,8 +1,8 @@
-import pytest
+# import pytest
 import os
 import session6
 from typing import Callable
-from session6 import function_tracker
+from session6 import function_tracker,func_count_tracker_modified
 
 ## For testing purpose
 def add(a:int,b:int):
@@ -88,3 +88,46 @@ def test_function_tracker_has_document():
 def test_function_tracker_full_test():
     print(session6.func_count_tracker)
     assert session6.func_count_tracker == {'add': 1, 'mul': 2, 'div': 1}, "Global varibale is not updated,some hting went wrong"
+
+## Q4: function tracker modified wit condition tester
+
+control_dist = {'add':True,
+                'mul':True,
+                'div':False}
+
+def test_function_tracker_modified_test_add():
+    @func_count_tracker_modified(control_dist)
+    def add(a,b):
+        return a+b
+    add(3,4)
+    assert session6.func_count_tracker_modified_dist['add'] == 1, "Global varibale is not updated,some hting went wrong"
+
+# test_function_tracker_modified_test_add()
+
+def test_function_tracker_modified_test_mul():
+    @func_count_tracker_modified(control_dist)
+    def mul(a,b):
+        return a*b
+    mul(3,4)
+    mul(3,4)
+    assert session6.func_count_tracker_modified_dist['mul'] == 2, "Global varibale is not updated,some hting went wrong"
+
+def test_function_tracker_modified_test_div():
+    @func_count_tracker_modified(control_dist)
+    def div(a,b):
+        return a+b
+    div(3,4)
+    assert 'div' not in session6.func_count_tracker_modified_dist, "Global varibale is not updated,some hting went wrong"
+
+
+def test_function_tracker_modified_is_closure():
+    fu = session6.func_count_tracker_modified(lambda a,b : a+b)
+    assert isinstance(fu,Callable) , "document_checker is not closure"
+
+def test_function_tracker_modified_has_document():
+    fu = session6.document_checker()
+    assert fu(session6.func_count_tracker_modified) , "Document_checker dont have docs"
+
+def test_function_tracker_modified_full_test():
+    print(session6.func_count_tracker_modified_dist)
+    assert session6.func_count_tracker_modified_dist == {'add': 1, 'mul': 2}, "Global varibale is not updated,some hting went wrong"
