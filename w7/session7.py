@@ -45,8 +45,19 @@ def logger(fn: "Function"):
 # YOU CAN ONLY REPLACE "#potentially missing code" LINES WITH MULTIPLE LINES BELOW
 # KEEP THE REST OF THE CODE SAME
 def decorator_factory(access:str):
-	# MISSING CODE
-	pass
+	def accessor(fn): ## decorator
+		access_maper = {
+			'high' : 4,
+			'mid' : 3,
+			'low' : 2,
+			'no' :1
+		}
+		@wraps(fn)
+		def inner(*args,**kwargs):
+			fn(*args,**kwargs)
+			return range(0,access_maper[access]) if access in access_maper else 'Improper access keyword set'
+		return inner
+	return accessor
 
 
 # The authenticate function. Start with a dec_factory that sets the password. It's inner

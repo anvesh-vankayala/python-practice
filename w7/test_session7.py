@@ -140,7 +140,7 @@ def test_access_rights_function():
 
 	assert decorator_factory('random')(func)() == "Improper access keyword set"
 
-
+test_access_rights_function()
 
 def test_authenticate_function():
 	@authenticate("secret")
