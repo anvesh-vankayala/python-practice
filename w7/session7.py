@@ -63,8 +63,17 @@ def decorator_factory(access:str):
 # The authenticate function. Start with a dec_factory that sets the password. It's inner
 # will not be called with "password", *args, **kwargs on the fn
 def authenticate(set_password):
-	# MISSING CODE
-	pass
+
+	def pass_setter(fn):
+		@wraps(fn)
+		def inner(*args):
+			if not len(args)>0:
+				raise TypeError()
+			if args[0] != set_password:
+				return "Wrong Password"
+			return fn()
+		return inner
+	return pass_setter
 
 
 # The timing function
