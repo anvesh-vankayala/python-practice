@@ -78,7 +78,19 @@ def authenticate(set_password):
 
 # The timing function
 def timed(reps):
-    # MISSING CODE
-	pass
+	
+	def timmer(fn):
+		li = []
+		@wraps(fn)
+		def inner(*args,**kwargs):
+			for i in range(0,reps):
+				start = perf_counter()
+				fn(*args,**kwargs)
+				li.append(perf_counter() - start)
+			print(f'Avg time taken for {fn.__name__}, with sleep time of 0.2  \
+		  	for 10 repetitions, avg time taken {sum(li)/len(li)}')			
+
+		return inner
+	return timmer
 
 
