@@ -6,6 +6,8 @@ import sys
 import time
 import inspect
 import os
+import session7
+import re
 
 README_CONTENT_CHECK_FOR = [
     "and",
@@ -55,14 +57,14 @@ def test_readme_file_for_formatting():
 def test_indentations():
     ''' Returns pass if used four spaces for each level of syntactically \
     significant indenting.'''
-    lines = inspect.getsource(session4)
+    lines = inspect.getsource(session7)
     spaces = re.findall('\n +.', lines)
     for space in spaces:
         assert len(space) % 4 == 2, "Your script contains misplaced indentations"
         assert len(re.sub(r'[^ ]', '', space)) % 4 == 0, "Your code indentation does not follow PEP8 guidelines"
 
 def test_function_name_had_cap_letter():
-    functions = inspect.getmembers(session4, inspect.isfunction)
+    functions = inspect.getmembers(session7, inspect.isfunction)
     for function in functions:
         assert len(re.findall('([A-Z])', function[0])) == 0, "You have used Capital letter(s) in your function names"
 
