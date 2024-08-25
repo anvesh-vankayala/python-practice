@@ -5,8 +5,8 @@ class Polygon:
     def __init__(self, n, R):
         if n < 3:
             raise ValueError('Polygon must have at least 3 vertices')
-        self._n = n
-        self._R = R
+        self._n = n ## No. vertices
+        self._R = R ## Circum radius
 
     def __repr__(self) -> str:
         return f'Ploygon(n={self._n}, R = {self._R})'
@@ -56,4 +56,4 @@ class Polygon:
         else:
             return NotImplemented
         
-print(Polygon(3,10))
+# print(Polygon(3,10))
