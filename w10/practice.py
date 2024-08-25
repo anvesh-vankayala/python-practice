@@ -17,12 +17,12 @@ class Square():
         return rtn_val
     
 #####################################
-sq = Square(100)
+# sq = Square(100)
 
-# while(True):
-#     print(next(sq))
+# # while(True):
+# #     print(next(sq))
 
-[print(i, end='\t') for i in sq]
+# [print(i, end='\t') for i in sq]
 #####################################
 
 
@@ -35,12 +35,12 @@ class Square:
 
     def __init__(self,
                  length):
-
         self.length = length
-    
-    
 
-    class SquareIterator:
+    def __iter__(self):
+        return self.SquareIterator(self)
+
+    class SquareIterator():
 
         def __init__(self,sq_obj):
 
@@ -56,6 +56,15 @@ class Square:
             rtn_val = self.i ** 2
             self.i+=1
             return rtn_val
-        
-    def __iter__(self):
-        return SquareIterator(self)
+
+#####################################
+
+sq = Square(5)
+
+print(id(sq.__iter__), id(iter(sq)))
+print(id(sq.__iter__), id(iter(sq)))
+
+[print(i,end='\t') for i in sq]
+
+
+#####################################
