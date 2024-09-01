@@ -36,3 +36,26 @@ print(cle.area)
 print('...............................')
 cle = Circle(5)
 print(cle.area)
+
+#########################################################################################################
+## Counter - which can be alternate for 'range'
+def counter(start,end):
+    start-=1 ## To start with same given value.
+    end-=1 ## End value would be excluded. (similar to range)
+    def inner():
+        nonlocal start
+        nonlocal end
+        if start < end:
+            start+=1
+            return start
+        else:
+             raise StopIteration()
+    return inner
+
+cnt = counter(0,5)
+
+for i in range(0,5):
+    try:
+        print(cnt())
+    except Exception as e:
+        print(e)

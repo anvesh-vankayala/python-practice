@@ -7,11 +7,11 @@ class Polygon:
             raise ValueError('Polygon must have at least 3 vertices')
         self._n = n ## No. vertices
         self._R = R ## Circum radius
-        self.interior_angles = None
-        self.side_length = None
-        self.apothem = None
-        self.area = None
-        self.perimeter = None
+        self._interior_angles = None
+        self._side_length = None
+        self._apothem = None
+        self._area = None
+        self._perimeter = None
 
     def __repr__(self) -> str:
         return f'Ploygon(n={self._n}, R = {self._R})'
@@ -30,55 +30,55 @@ class Polygon:
     
     @count_vertices.setter
     def count_vertices(self, n):
-        self.count_vertices = n
-        self.interior_angles = None
-        self.side_length = None
-        self.apothem = None
-        self.area = None
-        self.perimeter = None
+        self._n = n
+        self._interior_angles = None
+        self._side_length = None
+        self._apothem = None
+        self._area = None
+        self._perimeter = None
 
     @circumradius.setter
     def circumradius(self, r):
         self._R = r
-        self.side_length = None
-        self.apothem = None
-        self.area = None
-        self.perimeter = None
+        self._side_length = None
+        self._apothem = None
+        self._area = None
+        self._perimeter = None
 
     @property
     def interior_angles(self):
-        if self.interior_angles == None:
-            self.interior_angles = (self._n - 2) * 180 / self._n
+        if self._interior_angles == None:
+            self._interior_angles = (self._n - 2) * 180 / self._n
             print(f'computed interior angles')
-        return self.interior_angles
+        return self._interior_angles
     
     @property
     def side_length(self):
-        if self.side_length == None:
-            self.side_length =  2 * self._R * math.sin(math.pi/ self._n)
+        if self._side_length == None:
+            self._side_length =  2 * self._R * math.sin(math.pi/ self._n)
             print(f'computed side length')
-        return self.side_length
+        return self._side_length
     
     @property
     def apothem(self):
-        if self.apothem == None:
-            self.apothem = self._R * math.cos(math.pi / self._n)
+        if self._apothem == None:
+            self._apothem = self._R * math.cos(math.pi / self._n)
             print(f'computed apothme')
-        return self.apothem
+        return self._apothem
     
     @property
     def area(self):
-        if self.area == None:
-           self.area = self._n / 2 * self.side_length * self.apothem
+        if self._area == None:
+           self._area = self._n / 2 * self.side_length * self.apothem
            print(f'computed area')
-        return self.area
+        return self._area
     
     @property
     def perimeter(self):
-        if self.perimeter == None:
-            self.perimeter = self._n * self.side_length
+        if self._perimeter == None:
+            self._perimeter = self._n * self.side_length
             print(f'computed perimeter')
-        return self.perimeter
+        return self._perimeter
     
     def __eq__(self,other):
         if isinstance(other , self.__class__):
@@ -92,5 +92,11 @@ class Polygon:
             return self.count_vertices > other.count_vertices
         else:
             return NotImplemented
-        
+    
+poly = Polygon(4,10)
+
+print(poly.area)
+print(poly.area)
+
+
 # print(Polygon(3,10))
