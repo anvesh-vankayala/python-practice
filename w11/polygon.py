@@ -49,30 +49,35 @@ class Polygon:
     def interior_angles(self):
         if self.interior_angles == None:
             self.interior_angles = (self._n - 2) * 180 / self._n
+            print(f'computed interior angles')
         return self.interior_angles
     
     @property
     def side_length(self):
         if self.side_length == None:
             self.side_length =  2 * self._R * math.sin(math.pi/ self._n)
+            print(f'computed side length')
         return self.side_length
     
     @property
     def apothem(self):
         if self.apothem == None:
             self.apothem = self._R * math.cos(math.pi / self._n)
+            print(f'computed apothme')
         return self.apothem
     
     @property
     def area(self):
         if self.area == None:
            self.area = self._n / 2 * self.side_length * self.apothem
+           print(f'computed area')
         return self.area
     
     @property
     def perimeter(self):
         if self.perimeter == None:
             self.perimeter = self._n * self.side_length
+            print(f'computed perimeter')
         return self.perimeter
     
     def __eq__(self,other):
