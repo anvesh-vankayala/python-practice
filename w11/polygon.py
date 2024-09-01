@@ -93,10 +93,10 @@ class Polygon:
         else:
             return NotImplemented
     
-poly = Polygon(4,10)
+# poly = Polygon(4,10)
 
-print(poly.area)
-print(poly.area)
+# print(poly.area)
+# print(poly.area)
 
 
 # print(Polygon(3,10))

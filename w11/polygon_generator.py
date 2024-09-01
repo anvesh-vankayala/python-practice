@@ -39,19 +39,22 @@ class Polygons:
         def __init__(self,pol_obj) -> None:
             self.i = 0
             self.pol_obj = pol_obj
-            self.poly_iter = iter(self.pol_obj._polygons)
+            #self.poly_iter = iter(self.pol_obj._polygons)
+            self.count = pol_obj.count
 
         def __iter__(self):
             return self
         
         def __next__(self):
-            if self.i > len(self.pol_obj._polygons):  ## it an optinal, even list will have default stop iteration.
-                raise StopIteration('i is greater then given length')
-            self.i+=1
-            return next(self.poly_iter)
-    
-    # def __getitem__(self,s):
-    #     return self._polygons[s]
+            # if self.i > len(self.pol_obj._polygons):  ## it an optinal, even list will have default stop iteration.
+            #     raise StopIteration('i is greater then given length')
+            # self.i+=1
+            # return next(self.poly_iter)
+            try:
+                m = self.count()
+                return Polygon(m,self.pol_obj._R)
+            except Exception as e:
+                print(e)
     
     @property
     def max_efficiency_polugon(self):
@@ -60,13 +63,15 @@ class Polygons:
                                  reverse=True)
         return sorted_polygons[0]
 
-# polys = Polygons(6,10)
-# poly_iter = iter(polys)
-# print(next(poly_iter))
-# print(next(poly_iter))
-# print(next(poly_iter))
-
-# [print(i) for i in polys]
+polys = Polygons(10,10)
+poly_iter = iter(polys)
+print(next(poly_iter))
+print(next(poly_iter))
+print(next(poly_iter))
+print(next(poly_iter))
+print(next(poly_iter))
+print(next(poly_iter))
+print(next(poly_iter))
 
 
 
