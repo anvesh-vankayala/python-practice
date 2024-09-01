@@ -7,6 +7,11 @@ class Polygon:
             raise ValueError('Polygon must have at least 3 vertices')
         self._n = n ## No. vertices
         self._R = R ## Circum radius
+        self.interior_angles = None
+        self.side_length = None
+        self.apothem = None
+        self.area = None
+        self.perimeter = None
 
     def __repr__(self) -> str:
         return f'Ploygon(n={self._n}, R = {self._R})'
@@ -23,25 +28,52 @@ class Polygon:
     def circumradius(self):
         return self._R
     
+    @count_vertices.setter
+    def count_vertices(self, n):
+        self.count_vertices = n
+        self.interior_angles = None
+        self.side_length = None
+        self.apothem = None
+        self.area = None
+        self.perimeter = None
+
+    @circumradius.setter
+    def circumradius(self, r):
+        self._R = r
+        self.side_length = None
+        self.apothem = None
+        self.area = None
+        self.perimeter = None
+
     @property
     def interior_angles(self):
-        return (self._n - 2) * 180 / self._n
+        if self.interior_angles == None:
+            self.interior_angles = (self._n - 2) * 180 / self._n
+        return self.interior_angles
     
     @property
     def side_length(self):
-        return 2 * self._R *math.sin(math.pi/ self._n)
+        if self.side_length == None:
+            self.side_length =  2 * self._R * math.sin(math.pi/ self._n)
+        return self.side_length
     
     @property
     def apothem(self):
-        return self._R * math.cos(math.pi / self._n)
+        if self.apothem == None:
+            self.apothem = self._R * math.cos(math.pi / self._n)
+        return self.apothem
     
     @property
     def area(self):
-        return self._n / 2 * self.side_length * self.apothem
+        if self.area == None:
+           self.area = self._n / 2 * self.side_length * self.apothem
+        return self.area
     
     @property
     def perimeter(self):
-        return self._n * self.side_length
+        if self.perimeter == None:
+            self.perimeter = self._n * self.side_length
+        return self.perimeter
     
     def __eq__(self,other):
         if isinstance(other , self.__class__):
