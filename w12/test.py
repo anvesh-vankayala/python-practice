@@ -19,13 +19,16 @@ class Tickets(NamedTuple):
 
 
 def lazy_csv_reader(csv_file):
-    maper = lambda x: tuple(int(i) for i in x.split('/')[::-1][])
+    maper = lambda x: tuple(int(i) for i in x.split('/')[::-1])
     with open(csv_file) as f:
         r = csv.reader(f)
         for row in r:
             if row[0] == 'Summons Number':
                 continue            
-            date = datetime.datetime(*maper(row[4]))
+            dat = maper(row[4])
+            dat = (dat[0],dat[2],dat[1])
+            date = datetime.datetime(*dat)
+            
             tik = Tickets(row[0],row[1],row[2],row[3],date,
                     row[5],row[6],row[7],row[8])
             yield tik
