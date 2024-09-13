@@ -16,7 +16,7 @@ class Tickets(NamedTuple):
     violation_type : str
 
 
-
+make_wise_violations = {}
 
 def lazy_csv_reader(csv_file):
     maper = lambda x: tuple(int(i) for i in x.split('/')[::-1])
@@ -31,9 +31,16 @@ def lazy_csv_reader(csv_file):
             
             tik = Tickets(row[0],row[1],row[2],row[3],date,
                     row[5],row[6],row[7],row[8])
+            if tik.make in make_wise_violations:
+                if tik.violation_type!= '':
+                    make_wise_violations[tik.make]+= 1
+            else:
+                make_wise_violations[tik.make]= 1
             yield tik
 
 # ['Summons Number', 'Plate ID', 'Registration State', 'Plate Type', 'Issue Date', 'Violation Code', 'Vehicle Body Type', 'Vehicle Make', 'Violation Description']
 csv_pa = '/workspaces/python-practice/w12/nyc_parking_tickets_extract-1.csv'
 for row in lazy_csv_reader(csv_pa):
     print(row)
+
+print(make_wise_violations)
