@@ -1,4 +1,4 @@
-## Module Polygon.py
+## Module Polygon.py and polygon_generator.py
 - This module has three components
     -  Polygon class with : Lazy and one time calculation of properties.
     -  Iterable and Iterator : With lazy loading of Polygon object.In scenarios where underlying object size is large, in that case entire object list cannot be loaded in RAM. 
