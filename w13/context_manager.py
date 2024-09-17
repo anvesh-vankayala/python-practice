@@ -25,14 +25,15 @@ class FileContextIterator:
     
     def __next__(self):
         row = next(self._f)
-        row_striped = tuple(row.strip('\n').split(';'))
+        row_striped = tuple(row.strip('\n').split(self.delimiter))
         return self.row(*row_striped)
         # return row_striped
 
     def __enter__(self):
         self._f = open(file=self.file_path, mode='r')
         column_names = next(self._f)
-        self.row = namedtuple('Row', column_names.strip('\n').split(';'))
+        self.delimiter = ';' if ';' in column_names.strip('\n') else ','
+        self.row = namedtuple('Row', column_names.strip('\n').split(self.delimiter))
 
         return self
 
@@ -43,5 +44,11 @@ class FileContextIterator:
 
 
 with FileContextIterator('/workspaces/python-practice/w13/cars.csv') as data:
+    for r in data:
+        print(r)
+
+print('################################################################################################################################################')
+
+with FileContextIterator('/workspaces/python-practice/w13/personal_info.csv') as data:
     for r in data:
         print(r)
